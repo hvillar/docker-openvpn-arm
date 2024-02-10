@@ -1,7 +1,7 @@
 # Original credit: https://github.com/jpetazzo/dockvpn
 
 # Smallest base image
-FROM hypriot/rpi-alpine-scratch:edge
+FROM alpine:latest
 
 MAINTAINER Giovanni Bassi <giggio@giggio.net>
 
