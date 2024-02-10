@@ -22,15 +22,6 @@ jobs:
           locale: "US"
           level: error
 
-      - name: Build test image
-        run: docker build --target test -t test-container .
-
-      # - name: Run tests in test container
-      #   run: |
-      #     touch coverage.txt
-      #     docker run --rm \
-      #     -v "$(pwd)/coverage.txt:/tmp/gobuild/coverage.txt" \
-      #     test-container
       - name: Build final image
         run: docker build -t final-image .
 
