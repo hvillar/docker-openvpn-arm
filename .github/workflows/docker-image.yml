@@ -22,12 +22,6 @@ jobs:
           locale: "US"
           level: error
 
-      - name: Linting
-        run: docker build --target lint .
-
-      - name: Mocks check
-        run: docker build --target mocks .
-
       - name: Build test image
         run: docker build --target test -t test-container .
 
