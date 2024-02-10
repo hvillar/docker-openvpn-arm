@@ -5,7 +5,7 @@ FROM alpine:latest
 
 MAINTAINER Giovanni Bassi <giggio@giggio.net>
 
-RUN apk add --update openvpn iptables bash easy-rsa openvpn-auth-pam google-authenticator pamtester && \
+RUN apk add --update openvpn iptables bash easy-rsa && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
 
@@ -26,4 +26,4 @@ ADD ./bin /usr/local/bin
 RUN chmod a+x /usr/local/bin/*
 
 # Add support for OTP authentication using a PAM module
-ADD ./otp/openvpn /etc/pam.d/
+# ADD ./otp/openvpn /etc/pam.d/
