@@ -15,7 +15,7 @@ a corresponding [Digital Ocean Community Tutorial](http://bit.ly/1AGUZkq).
 #### Upstream Links
 
 * Docker Registry @ [hecvidi/docker-openvpn-arm](https://hub.docker.com/r/hecvidi/docker-openvpn-arm/)
-* GitHub @ [hecvidi/docker-openvpn-arm](https://github.com/hecvidi/docker-openvpn-arm)
+* GitHub @ [hvillar/docker-openvpn-arm](https://github.com/hvillar/docker-openvpn-arm)
 
 ## Quick Start
 
