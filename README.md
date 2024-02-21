@@ -19,34 +19,30 @@ a corresponding [Digital Ocean Community Tutorial](http://bit.ly/1AGUZkq).
 
 ## Quick Start
 
-* Pick a name for the `$OVPN_DATA` data volume container, it will be created automatically.
+* Initialize the volume container that will hold the configuration files and certificates
 
-        OVPN_DATA="ovpn-data"
-
-* Initialize the `$OVPN_DATA` container that will hold the configuration files and certificates
-
-        docker volume create --name $OVPN_DATA
-        docker run -v $OVPN_DATA:/etc/openvpn --rm giggio/openvpn-arm ovpn_genconfig -u udp://VPN.SERVERNAME.COM
-        docker run -v $OVPN_DATA:/etc/openvpn --rm -it giggio/openvpn-arm ovpn_initpki nopass
+        docker volume create --name ovpn-data
+        docker run -v ovpn-data:/etc/openvpn --rm hecvidi/docker-openvpn-arm ovpn_genconfig -u udp://VPN.SERVERNAME.COM
+        docker run -v ovpn-data:/etc/openvpn --rm -it hecvidi/docker-openvpn-arm ovpn_initpki nopass
 
 * Start OpenVPN server process
 
-        docker run -v $OVPN_DATA:/etc/openvpn -d --name openvpn -p 1194:1194/udp --cap-add=NET_ADMIN giggio/openvpn-arm
+        docker run -v ovpn-data:/etc/openvpn -d --name openvpn -p 1194:1194/udp --cap-add=NET_ADMIN hecvidi/docker-openvpn-arm
 
 * Generate a client certificate without a passphrase
 
-        docker run -v $OVPN_DATA:/etc/openvpn --rm -it giggio/openvpn-arm easyrsa build-client-full CLIENTNAME nopass
+        docker run -v ovpn-data:/etc/openvpn --rm -it hecvidi/docker-openvpn-arm easyrsa build-client-full CLIENTNAME nopass
 
 * Retrieve the client configuration with embedded certificates
 
-        docker run -v $OVPN_DATA:/etc/openvpn --rm giggio/openvpn-arm ovpn_getclient CLIENTNAME > CLIENTNAME.ovpn
+        docker run -v ovpn-data:/etc/openvpn --rm hecvidi/docker-openvpn-arm ovpn_getclient CLIENTNAME > CLIENTNAME.ovpn
 
 ## Debugging Tips
 
 * Create an environment variable with the name DEBUG and value of 1 to enable debug output (using "docker -e").
 
-        docker run -v $OVPN_DATA:/etc/openvpn -p 1194:1194/udp --privileged -e DEBUG=1 giggio/openvpn-arm
-
+        docker run -v ovpn-data:/etc/openvpn -p 1194:1194/udp --privileged -e DEBUG=1 hecvidi/docker-openvpn-arm
+  
 * Test using a client that has openvpn installed correctly 
 
         $ openvpn --config CLIENTNAME.ovpn
@@ -145,8 +141,8 @@ OpenVPN with latest OpenSSL on Ubuntu 12.04 LTS).
 ### It Doesn't Stomp All Over the Server's Filesystem
 
 Everything for the Docker container is contained in two images: the ephemeral
-run time image (giggio/openvpn-arm) and the `$OVPN_DATA` data volume. To remove
-it, remove the corresponding containers, `$OVPN_DATA` data volume and Docker
+run time image (giggio/openvpn-arm) and the `$ovpn-data` data volume. To remove
+it, remove the corresponding containers, `$ovpn-data` data volume and Docker
 image and it's completely removed.  This also makes it easier to run multiple
 servers since each lives in the bubble of the container (of course multiple IPs
 or separate ports are needed to communicate with the world).
