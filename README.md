@@ -2,9 +2,9 @@
 
 This is a fork from [kylemanna/docker-openvpn](https://github.com/kylemanna/docker-openvpn) which is not focused on ARM.
 
-[![Docker Stars](https://img.shields.io/docker/stars/giggio/openvpn-arm.svg)](https://hub.docker.com/r/giggio/openvpn-arm/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/giggio/openvpn-arm.svg)](https://hub.docker.com/r/giggio/openvpn-arm/)
-[![ImageLayers](https://images.microbadger.com/badges/image/giggio/openvpn-arm.svg)](https://microbadger.com/#/images/giggio/openvpn-arm)
+[![Docker Stars](https://img.shields.io/docker/stars/hecvidi/docker-openvpn-arm.svg)](https://hub.docker.com/r/hecvidi/docker-openvpn-arm/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/hecvidi/docker-openvpn-arm.svg)](https://hub.docker.com/r/hecvidi/docker-openvpn-arm/)
+[![ImageLayers](https://images.microbadger.com/badges/image/hecvidi/docker-openvpn-arm.svg)](https://microbadger.com/#/images/hecvidi/docker-openvpn-arm)
 
 
 OpenVPN server in a Docker container complete with an EasyRSA PKI CA.
@@ -14,8 +14,8 @@ a corresponding [Digital Ocean Community Tutorial](http://bit.ly/1AGUZkq).
 
 #### Upstream Links
 
-* Docker Registry @ [giggio/openvpn-arm](https://hub.docker.com/r/giggio/openvpn-arm/)
-* GitHub @ [giggio/docker-openvpn-arm](https://github.com/giggio/docker-openvpn-arm)
+* Docker Registry @ [hecvidi/docker-openvpn-arm](https://hub.docker.com/r/hecvidi/docker-openvpn-arm/)
+* GitHub @ [hecvidi/docker-openvpn-arm](https://github.com/hecvidi/docker-openvpn-arm)
 
 ## Quick Start
 
@@ -55,7 +55,7 @@ a corresponding [Digital Ocean Community Tutorial](http://bit.ly/1AGUZkq).
 
 ## How Does It Work?
 
-Initialize the volume container using the `giggio/openvpn-arm` image with the
+Initialize the volume container using the `hecvidi/docker-openvpn-arm` image with the
 included scripts to automatically generate:
 
 - Diffie-Hellman parameters
@@ -71,11 +71,11 @@ declares that directory as a volume. It means that you can start another
 container with the `-v` argument, and access the configuration.
 The volume also holds the PKI keys and certs so that it could be backed up.
 
-To generate a client certificate, `giggio/openvpn-arm` uses EasyRSA via the
+To generate a client certificate, `hecvidi/docker-openvpn-arm` uses EasyRSA via the
 `easyrsa` command in the container's path.  The `EASYRSA_*` environmental
 variables place the PKI CA under `/etc/openvpn/pki`.
 
-Conveniently, `giggio/openvpn-arm` comes with a script called `ovpn_getclient`,
+Conveniently, `hecvidi/docker-openvpn-arm` comes with a script called `ovpn_getclient`,
 which dumps an inline OpenVPN client configuration file.  This single file can
 then be given to a client for access to the VPN.
 
@@ -141,8 +141,8 @@ OpenVPN with latest OpenSSL on Ubuntu 12.04 LTS).
 ### It Doesn't Stomp All Over the Server's Filesystem
 
 Everything for the Docker container is contained in two images: the ephemeral
-run time image (giggio/openvpn-arm) and the `$ovpn-data` data volume. To remove
-it, remove the corresponding containers, `$ovpn-data` data volume and Docker
+run time image (hecvidi/docker-openvpn-arm) and the `ovpn-data` data volume. To remove
+it, remove the corresponding containers, `ovpn-data` data volume and Docker
 image and it's completely removed.  This also makes it easier to run multiple
 servers since each lives in the bubble of the container (of course multiple IPs
 or separate ports are needed to communicate with the world).
