@@ -27,7 +27,7 @@ a corresponding [Digital Ocean Community Tutorial](http://bit.ly/1AGUZkq).
 
 * Start OpenVPN server process
 
-        docker run -v ovpn-data:/etc/openvpn -d --name openvpn -p 1194:1194/udp --cap-add=NET_ADMIN hecvidi/docker-openvpn-arm
+        docker run --restart=always -v ovpn-data:/etc/openvpn -d --name openvpn -p 1194:1194/udp --cap-add=NET_ADMIN hecvidi/docker-openvpn-arm
 
 * Generate a client certificate without a passphrase
 
